@@ -14,9 +14,11 @@ function transpose(a) {
         return a.map(function(r) { return r[c]; });
     });
 }
-var alphanumeric = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z")
+var alphanumeric = new Array('O', 'T', 'R', 'F', 3, 7 , 'B', 6, 'X', 'K', 2, 'I' , 'U', 4, 1, 'C', 'V', 'E', 'Q', 'P', 'M', 'H', 'G', 'S' , 5, 0, 'J', 9, 'A', 'L' , 8, 'Y', 'Z', 'W', 'N', 'D' )
+
+
+
 var table = new Array('A', 'D', 'F', 'G', 'V', 'X')
-shuffle(alphanumeric) // random polybus square
 var polybusinit = []
 while(alphanumeric.length) polybusinit.push(alphanumeric.splice(0,6)) // makes polybus array into a 2d 6x6 matrix
 console.log(polybusinit)
@@ -39,9 +41,11 @@ for(j=0; j < message.length; j++){
 }
 // console.log(ciphertext1)
 while(ciphertext1.length) ciphertext2.push(ciphertext1.splice(0,keyword.length))
+console.log(ciphertext2)
 ciphertext2.unshift(keyword)
 // keyword.sort()
 ciphertext3 = transpose(ciphertext2)
+console.log(ciphertext3)
 ciphertext3.sort()
 console.log(ciphertext3)
 ciphertext4 = transpose(ciphertext3)

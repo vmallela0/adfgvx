@@ -1,10 +1,177 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-    <head>
-        <body>
-            <h1>ADFGVX</h1>
-            <input type="text" id="ADFGVXin" name="input"><br><br>
-            <input type="text" id="ADFGVXkey" name="keyword"><br><br>
-        </body>
-    </head>
+
+<head>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon/favicon-32x32.png">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Vollkorn:400,900i&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap" rel="stylesheet">
+    <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4/stitch.js"></script>
+    <title>The adfgvx cipher</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <noscript> <link rel="stylesheet" href="../assets/css/noscript.css"/> </noscript>
+</head>
+
+<body class="is-preload">
+    <style>
+        h1 {
+            color: dodgerblue;
+            font-family: 'Bungee Shade', cursive;
+            text-align: center;
+            align-self: center;
+            text-decoration: none;
+            border: none !important;
+        }
+        
+        h2 {
+            color: dodgerblue;
+            font-family: 'Racing Sans One', sans-serif;
+            font: italic bold;
+            border: none !important;
+            text-align: center;
+            align-self: center;
+        }
+        
+        h3 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: large;
+            line-height: 1.8;
+            border: none !important;
+        }
+        
+        h4 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: medium;
+            border: none !important;
+            text-align: center;
+        }
+        
+        h5 {
+            font-family: 'Open Sans', sans-serif;
+            border: none !important;
+        }
+        
+        p {
+            font-family: 'Open Sans', sans-serif;
+            padding-left: 30%;
+            padding-right: 30%;
+            text-align: center;
+        }
+        
+        h1:hover {
+            padding-bottom: 2px;
+            text-decoration-line: none;
+        }
+        
+         :right {
+            padding-left: 40%;
+        }
+        
+        span {
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        input {
+            position: relative;
+            font-family: monospace;
+            /* background-color: white; */
+            /* color: black; */
+            color: black;
+            /*for debugging */
+            font-size: x-large;
+            text-align: left;
+            outline: none;
+            width: 25%;
+        }
+        
+        a:hover {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+    </style>
+    <div id="container">
+    </div>
+    <div class="is-preload">
+        <style>
+            
+            .goo {
+                position: absolute;
+                /* top: 0; */
+            }
+            
+            .ink-cursor {
+                pointer-events: none;
+                position: fixed;
+                display: block;
+                border-radius: 0;
+                -webkit-transform-origin: center center;
+                transform-origin: center center;
+                mix-blend-mode: difference;
+                top: 0;
+                left: 0;
+                z-index: 1000;
+                -webkit-filter: url("#goo");
+                filter: url("#goo");
+            }
+            
+            .ink-cursor span {
+                position: absolute;
+                display: block;
+                width: 26px;
+                height: 26px;
+                border-radius: 20px;
+                background-color: dodgerblue;
+                -webkit-transform-origin: center center;
+                transform-origin: center center;
+                -webkit-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            }
+            
+            @media (max-width: 991px) {
+                .ink-cursor,
+                .ink-cursor span {
+                    display: none
+                }
+            }
+        </style>
+        <!-- Wrapper -->
+        <div class="center">
+            <header class="major">
+                <h2 style="font-size:xx-large">The ADFGVX cipher</h2>
+                <p style="text-align: center;"><strong>The <a href="http://practicalcryptography.com/ciphers/adfgvx-cipher/" style="color: dodgerblue;">ADFGVX cipher</a> was a cipher
+                    developed by Germany in 1918 for World War I. It is a fractionating transposition cipher which combined a modified Polybius square with a single columnar transposition.
+                    The cipher just uses the letters A, D, F, G, V and X (because at the time those letters were very different in <a href="http://www.learnmorsecode.com/" style="color: dodgerblue;">morse code</a>).
+                     By using some simple matrix operations, the cipher
+                    encrypts the plaintext. </strong></p>
+                <script src="./main.js"></script>
+                <script src="./mcode.js"></script>
+                <form style="padding-left: 30%;">
+                    <label for="msg">MESSAGE: </label>
+                    <input type="text" id="message" Value="ATTACK POSITION 127.0.0.1" name="message"><br><br>
+                    <label for="kywrd">KEYWORD: </label>
+                    <input type="text" id="key" value="LOCALHOST" name="key"><br><br>
+                    <input name="encrypt" value=" Encrypt " onclick="adfgvx(message)" type="button" style="width: 120px; text-align: left;" />
+                </form>
+
+                <p id="polymobius" style="position: relative;padding-left: 0%;">CIPHERTEXT: </p>
+                <p id="cipher"></p>
+                <p id="morsed" style="position: relative;padding-left: 0%;">MORSE CODE: </p>
+                <p id="morse"></p>
+                <p id="ciphertext" style="position: relative;padding-left: 0%;">POLYBIUS SQUARE: </p>
+                <p id="polybius"></p>
+
+                <br><br><br>
+                
+            </header>
+        </div>
+    </div>
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </div>
+</body>
+
 </html>
